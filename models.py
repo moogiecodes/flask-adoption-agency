@@ -19,7 +19,8 @@ class Pet(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(15), nullable=False)
     species = db.Column(db.String(20), nullable=False)
-    photo_url = db.Column(db.Text)
+    photo_url = db.Column(
+        db.Text, default='https://www.pngitem.com/pimgs/m/513-5137636_unknown-question-mark-question-mark-avatar-hd-png.png')
     age = db.Column(db.Integer, nullable=False)
     notes = db.Column(db.Text)
     available = db.Column(db.Boolean, nullable=False, default=True)

@@ -5,7 +5,18 @@
 {% block content %}
 <h1>Pets</h1>
 <div class='container-fluid'>
-
+  {% for pet in pets %}
+  <div>
+    <img width='200px' height='160px' src='{{ pet.photo_url }}'>
+    <h3>{{ pet.name }}
+      {% if pet.available == True %}
+      is Available!
+      {% else %}
+      is not available...
+      {% endif %}
+    </h3>
+  </div>
+  {% endfor %}
 </div>
-<button>Add a Pet</button>
+<button><a href='/add'>Add a Pet</a></button>
 {% endblock %}

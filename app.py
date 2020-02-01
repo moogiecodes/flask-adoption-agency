@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect
 from models import db, connect_db, Pet
 from forms import AddPetForm, EditPetForm
 from flask_debugtoolbar import DebugToolbarExtension
+from secrets import API_SECRET_KEY, TOKEN
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///adoption_agency'
@@ -39,7 +40,7 @@ def add_pet_form():
         db.session.add(new_pet)
         db.session.commit()
         return redirect('/')
-        
+
     else:
         return render_template('add_pet_form.html', form=form)
 
@@ -50,7 +51,7 @@ def pet_detail(pet_id):
 
     pet = Pet.query.get_or_404(pet_id)
     form = EditPetForm(obj=pet)
-    
+
     if form.validate_on_submit():
         pet.photo_url = form.photo_url.data
         pet.notes = form.notes.data
